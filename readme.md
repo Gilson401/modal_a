@@ -1,16 +1,52 @@
-Trata-se de projeto de api que salva e rotorna nº de cartão de crédito fictícios
+# ModalMais_a
 
-Clone o projeto,
+ModalMais_a é uma API para gerar e persistir números de cartão de crédito gerados aleatoriamente. Também retorna a lista com o histórico de números gerados para um determinado email.
+Feito em dotnet core 5 e EntityFramework 5.0.6
 
-Rode o comando dotne restore
+## Instalação
 
-Rode o comando dotnet run
+É necessário ter o SDK e a runtime pertinente para net core5 . Clone ou baixe o projeto, rode 
 
-A API tem dois endpoits e roda em localhost:
+```bash
+dotnet restore
+```
+para baixar as dependências.
 
-Post nesta rota cria um nº de cartão de crédito aleatório para o email dado e retorna para o requisitante. É necessário informar no reqbody: {email : xxxxx}  
-https://localhost:5001/v1/clientes
+## Uso
 
-Get nesta endpoit retorna os registros com os nº de cartão criados para o user conforme email inofrmado 
-https://localhost:5001/v1/clientes/?email=[useremail aqui]
+Execute para iniciar o aplicativo:
+```netcore
+dotnet run
 
+```
+O servidor local será em https://localhost:5001
+
+Para gerar um número de cartão faça uma requisição do tipo POST para https://localhost:5001/v1/clientes passando no body um objet json como {"email": "email@email.com"}.
+
+A resposta esperada é um objeto como 
+{
+    "id": 2,
+    "email": "12@thfhfhgh.com",
+    "cartao": "1288247223471533"
+}
+
+Para receber a lista dos números de cartão gerados para um determinado email passe uma requisição GET para
+https://localhost:5001/v1/clientes/
+passando como query "email=emailbuscado@email.com".
+
+
+A resposta esperada é um objeto como :
+{
+    "email": "12@thfhfhgh.com",
+    "listaDeCartoes": [
+        "3564662621814171",
+        "1288247223471533"
+    ]
+}
+
+## Contribuição
+Pull Requests são bem-vindas. Para mudanças importantes, abra uma issue primeiro para discutir o que você gostaria de mudar.
+
+
+## Licença
+[MIT](https://choosealicense.com/licenses/mit/)
