@@ -13,9 +13,9 @@ using System.Linq;
 namespace modal_a.Controllers
 {
     [ApiController]
-    [Route("v1/categories")]
+    [Route("v1/clientes")]
 
-    public class CategoryController : ControllerBase
+    public class ClientesController : ControllerBase
     {
 
         [HttpGet("email/{param1:alpha}")]
@@ -23,7 +23,7 @@ namespace modal_a.Controllers
 
         public async Task<ActionResult<ExpandoObject>> Get([FromServices] DataContext context, string email)
         {
-            var listDataBd = await context.Categories
+            var listDataBd = await context.Clientes
             .AsNoTracking()
             .Where(x => x.Email == email)
             .Distinct()
@@ -58,7 +58,7 @@ namespace modal_a.Controllers
                 }
 
                 model.Cartao = randomBetween10And20;
-                context.Categories.Add(model);
+                context.Clientes.Add(model);
                 await context.SaveChangesAsync();
 
                 return model;

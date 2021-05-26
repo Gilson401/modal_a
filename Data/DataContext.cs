@@ -12,7 +12,7 @@ namespace modalmais_a.Data
 
         }
 
-        public DbSet<Clientes> Categories { get; set; }
+        public DbSet<Clientes> Clientes { get; set; }
     }
 
 }
