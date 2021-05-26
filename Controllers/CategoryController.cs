@@ -22,16 +22,24 @@ namespace modal_a.Controllers
         [HttpGet("email/{param1:alpha}")]
         [Route("")]
 
-        public async Task<ActionResult<List<Category>>> Get([FromServices] DataContext context, string email)
+        public async Task<ActionResult<ExpandoObject>> Get([FromServices] DataContext context, string email)
         {
-            Console.WriteLine("email: {0}", email.ToString()); 
-            //JsonSerializer.Serialize(context));
+            Console.WriteLine("email: {0}", email.ToString());
 
             var categories = await context.Categories
             .AsNoTracking()
             .Where(x => x.Email == email)
+            .Distinct()
+            .OrderBy(x => x.Id)
             .ToListAsync();
-            return categories;
+
+            dynamic ObjectToReturn = new ExpandoObject();
+            ObjectToReturn.email = email.ToString();
+            ObjectToReturn.listaDeCartoes = new List<string>();
+
+            categories.ForEach(num => ObjectToReturn.listaDeCartoes.Add(num.Cartao));
+
+            return ObjectToReturn;
         }
 
 
@@ -49,10 +57,10 @@ namespace modal_a.Controllers
                 string randomBetween10And20 = "";
                 for (int a = 0; a < 16; a = a + 1)
                 {
-                   randomBetween10And20 += rnd.Next(0, 9).ToString();
+                    randomBetween10And20 += rnd.Next(0, 9).ToString();
                 }
 
-                model.Cartao = randomBetween10And20;      
+                model.Cartao = randomBetween10And20;
                 context.Categories.Add(model);
                 await context.SaveChangesAsync();
 
@@ -63,10 +71,10 @@ namespace modal_a.Controllers
                 return BadRequest(ModelState);
             }
         }
-    
-    
-    
+
+
+
     }
 
-    
+
 }
