@@ -18,7 +18,7 @@ namespace modal_a.Controllers
     public class ClientesController : ControllerBase
     {
 
-        [HttpGet("email/{param1:alpha}")]
+        [HttpGet("{email}")]
         [Route("")]
 
         public async Task<ActionResult<ExpandoObject>> Get([FromServices] DataContext context, string email)

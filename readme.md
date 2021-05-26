@@ -1,7 +1,7 @@
 # ModalMais_a
 
 ModalMais_a é uma API para gerar e persistir números de cartão de crédito gerados aleatoriamente. Também retorna a lista com o histórico de números gerados para um determinado email.
-Feito em dotnet core 5 e EntityFramework 5.0.6
+Feito em C# com .Net Core e Entity Framework Core.
 
 ## Instalação
 
@@ -21,21 +21,21 @@ dotnet run
 ```
 O servidor local será em https://localhost:5001
 
-Para gerar um número de cartão faça uma requisição do tipo POST para https://localhost:5001/v1/clientes passando no body um objet json como {"email": "email@email.com"}.
+Para gerar um número de cartão faça uma requisição do tipo POST para https://localhost:5001/v1/clientes passando no body um  json como {"email": "email@email.com"}.
 
-A resposta esperada é um objeto como 
+A resposta esperada é um json como 
 {
     "id": 2,
     "email": "12@thfhfhgh.com",
     "cartao": "1288247223471533"
 }
 
-Para receber a lista dos números de cartão gerados para um determinado email passe uma requisição GET para
+Para receber a lista dos números de cartão gerados para um determinado email faça uma requisição GET para
 https://localhost:5001/v1/clientes/
-passando como query "email=emailbuscado@email.com".
+passando o  email como param .
 
 
-A resposta esperada é um objeto como :
+A resposta esperada é um json como :
 {
     "email": "12@thfhfhgh.com",
     "listaDeCartoes": [
