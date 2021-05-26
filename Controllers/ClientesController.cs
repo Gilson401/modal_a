@@ -18,7 +18,6 @@ namespace modal_a.Controllers
     public class CategoryController : ControllerBase
     {
 
-        // [HttpGet("{email:string}")]
         [HttpGet("email/{param1:alpha}")]
         [Route("")]
 
