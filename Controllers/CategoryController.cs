@@ -24,9 +24,7 @@ namespace modal_a.Controllers
 
         public async Task<ActionResult<ExpandoObject>> Get([FromServices] DataContext context, string email)
         {
-            Console.WriteLine("email: {0}", email.ToString());
-
-            var categories = await context.Categories
+            var listDataBd = await context.Categories
             .AsNoTracking()
             .Where(x => x.Email == email)
             .Distinct()
@@ -37,7 +35,7 @@ namespace modal_a.Controllers
             ObjectToReturn.email = email.ToString();
             ObjectToReturn.listaDeCartoes = new List<string>();
 
-            categories.ForEach(num => ObjectToReturn.listaDeCartoes.Add(num.Cartao));
+            listDataBd.ForEach(num => ObjectToReturn.listaDeCartoes.Add(num.Cartao));
 
             return ObjectToReturn;
         }
@@ -46,9 +44,9 @@ namespace modal_a.Controllers
         [HttpPost]
         [Route("")]
 
-        public async Task<ActionResult<Category>> Post(
+        public async Task<ActionResult<Clientes>> Post(
         [FromServices] DataContext context,
-        [FromBody] Category model)
+        [FromBody] Clientes model)
         {
             if (ModelState.IsValid)
             {
