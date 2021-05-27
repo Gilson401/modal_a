@@ -6,8 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using modalmais_a.Data;
 using modalmais_a.Models;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.Linq;
 
 namespace modal_a.Controllers
@@ -60,7 +58,6 @@ namespace modal_a.Controllers
                 model.Cartao = randomBetween10And20;
                 context.Clientes.Add(model);
                 await context.SaveChangesAsync();
-
                 return model;
             }
             else
@@ -68,9 +65,6 @@ namespace modal_a.Controllers
                 return BadRequest(ModelState);
             }
         }
-
-
-
     }
 
 

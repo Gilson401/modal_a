@@ -11,8 +11,10 @@ namespace modalmais_a.Data
         {
 
         }
-
+        //Aqui são informados as tabelas que serão usada na api. No nosso exemplo apenas teremos a tabela de clientes
         public DbSet<Clientes> Clientes { get; set; }
     }
 
 }
+
+
